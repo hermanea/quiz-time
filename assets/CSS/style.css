@@ -1,19 +1,43 @@
 * {
-
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 header {
     display: flex;
-    
+    justify-content: space-around;
+    align-items: center;
 
+    background-color: #529cd7;
+    height: 15vh;
+
+
+}
+
+h1 {
+    color: #D78D52;
 }
 
 main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
 
+    background-color: #CDD7E5;
+    height: 85vh;
 }
 
 #quiz-container {
-
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 55%;
+    
 
 }
 
