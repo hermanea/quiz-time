@@ -14,6 +14,41 @@ let quizQuestions = [
     question: "",
     options: ["", "", "", ""],
     answer: ""
+  },
+  {
+    question: "",
+    options: ["", "", "", ""],
+    answer: ""
+  },
+  {
+    question: "",
+    options: ["", "", "", ""],
+    answer: ""
+  },
+  {
+    question: "",
+    options: ["", "", "", ""],
+    answer: ""
+  },
+  {
+    question: "",
+    options: ["", "", "", ""],
+    answer: ""
+  },
+  {
+    question: "",
+    options: ["", "", "", ""],
+    answer: ""
+  },
+  {
+    question: "",
+    options: ["", "", "", ""],
+    answer: ""
+  },
+  {
+    question: "",
+    options: ["", "", "", ""],
+    answer: ""
   }
 ];
 
@@ -22,7 +57,7 @@ const quizContainer = document.getElementById("quiz-container");
 const questionElement = document.getElementById("question");
 const optionElements = document.getElementsByName("option");
 const nextButton = document.getElementById("next-button");
-const resultContainer = document.getElementById("result-container");
+// const resultContainer = document.getElementById("result-container");
 const startButton = document.getElementById("start-button");
 
 let currentQuestionIndex = 0;
