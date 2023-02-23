@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz Time</title>
-    <link rel="stylesheet" href="./assets/css/style.css"/>
+    <link rel="stylesheet" href="./assets/CSS/style.css"/>
 </head>
 <body>
     <header>
@@ -14,21 +14,22 @@
         <div id="timer">75 Seconds Remaining</div>
     </header>
     <main>
-        <button id="start-button">Begin</button>
+        <button id="start-button">Begin Quiz</button>
 
         <div id="quiz-container">
             <p id="question"></p>
             <div id="options-container">
-                <label><input type="radio" name=""> <span></span></label>
-                <label><input type="radio" name=""> <span></span></label>
-                <label><input type="radio" name=""> <span></span></label>
-                <label><input type="radio" name=""> <span></span></label>
+                <label class="option-box"><input type="radio" name="option"> <span></span></label>
+                <label class="option-box"><input type="radio" name="option"> <span></span></label>
+                <label class="option-box"><input type="radio" name="option"> <span></span></label>
+                <label class="option-box"><input type="radio" name="option"> <span></span></label>
             </div>
-            <button id="next-button"></button>
         </div>
+
+        <button id="next-button">Submit, Next Question</button>
 
     </main>
 
-    <script src="./assets/js/script.js"></script>
+    <script src="./assets/JS/index.js"></script>
 </body>
 </html>
