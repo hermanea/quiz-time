@@ -21,15 +21,28 @@
                 <p id="question"></p>
             </div>
             <div id="options-container" class="center">
-                <label class="option-box"><input type="radio" name="option" id="option1"> <span for="option1"></span></label>
-                <label class="option-box"><input type="radio" name="option" id="option2"> <span for="option2"></span></label>
-                <label class="option-box"><input type="radio" name="option" id="option3"> <span for="option3"></span></label>
-                <label class="option-box"><input type="radio" name="option" id="option4"> <span for="option4"></span></label>
+                <label class="option-box"><input type="radio" name="option" id="option0" value="0"> <span for="option0"></span></label>
+                <label class="option-box"><input type="radio" name="option" id="option1" value="1"> <span for="option1"></span></label>
+                <label class="option-box"><input type="radio" name="option" id="option2" value="2"> <span for="option2"></span></label>
+                <label class="option-box"><input type="radio" name="option" id="option3" value="3"> <span for="option3"></span></label>
             </div>
             <div id="button-container" class="center">
                 <button id="next-button">Submit, Next Question</button>
             </div>
         </div>
+
+        <div id="result-container" style="display:none;">
+        </div>
+
+        <div id="highscore-form" style="display:none;">
+            <form id="save-score-form">
+                <label for="intitials">Enter your Initials:</label>
+                <input type="text" id="intitials" name="initials">
+                <button type="submit">Save Score</button>
+            </form>
+        </div>
+
+
 
 
     </main>
