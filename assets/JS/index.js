@@ -78,22 +78,24 @@ let quizQuestions = [
 ];
 
 // Geting HTML elements.
-// const quizContainer = document.getElementById("quiz-container");
+const quizContainer = document.getElementById("quiz-container");
 const questionElement = document.getElementById("question");
 const optionElements = document.querySelectorAll('input[name="option"]');
 const optionLabels = document.querySelectorAll('#options-container label span');
 const nextButton = document.getElementById("next-button");
-// const resultContainer = document.getElementById("result-container");
 const startButton = document.getElementById("start-button");
-const quizContainer = document.getElementById("quiz-container");
-
-startButton.addEventListener("click", function() {
-    startButton.style.disaply = "none";
-    quizContainer.style.display = "block";
-});
-
+const timerElement = document.getElementById("timer");
+const TIME_LIMIT = 150;
+let timeLeft = TIME_LIMIT;
 let currentQuestionIndex = 0;
 let score = 0;
+// const resultContainer = document.getElementById("result-container");
+
+startButton.addEventListener("click", function() {
+    startButton.style.display = "none";
+    quizContainer.style.display = "block";
+    timerElement.classList.add("timer-started");
+});
 
 // Displaying current question with answer options.
 function displayQuestion() {
@@ -108,8 +110,11 @@ function displayQuestion() {
 function nextQuestion() {
   const selectedOption = document.querySelector('input[name="option"]:checked');
   if (selectedOption) {
+    checkAnswer(selectedOption);
     if (selectedOption.value === quizQuestions[currentQuestionIndex].answer) {
-      score++;
+        score++;
+    } else {
+        timeLeft -= 5;
     }
     currentQuestionIndex++;
     if (currentQuestionIndex < quizQuestions.length) {
@@ -123,6 +128,43 @@ function nextQuestion() {
   });
 }
 
+function startQuiz() {
+  const timerInterval = setInterval(() => {
+    updateTime(timerInterval);
+  }, 1000);
+
+  updateTime(timerInterval);
+
+  startButton.removeEventListener("click", startQuiz);
+  quizContainer.style.display = "block";
+}
+
+function checkAnswer(selectedOption) {
+    if (selectedOption.value !== quizQuestions[currentQuestionIndex].answer) {
+      timeLeft -= 5;
+    }
+}
+
+function updateTime(timerInterval) {
+  timeLeft--;
+  if (timeLeft === 0) {
+    // time's up, stop the timer and end the quiz
+    clearInterval(timerInterval);
+    timerElement.innerText = "Time's up!";
+    endQuiz();
+  } else {
+    timerElement.innerText = `${timeLeft} seconds left`;
+  }
+}
+
+// Adds event listeners to the buttons.
+startButton.addEventListener("click", startQuiz);
+nextButton.addEventListener("click", function() {
+    nextQuestion();
+});
+
+// Displays the first question when the quiz is loaded
+displayQuestion();
 
 // Displaying user's final score.
 // function displayResult() {
@@ -130,9 +172,3 @@ function nextQuestion() {
 //   resultContainer.style.display = "block";
 //   resultContainer.textContent = `Your score is ${score} out of ${quizQuestions.length}.`;
 // }
-
-// Adds event listeners to the buttons.
-nextButton.addEventListener("click", nextQuestion);
-
-// Displays the first question when the quiz is loaded
-displayQuestion();
