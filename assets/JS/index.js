@@ -78,12 +78,19 @@ let quizQuestions = [
 ];
 
 // Geting HTML elements.
-const quizContainer = document.getElementById("quiz-container");
+// const quizContainer = document.getElementById("quiz-container");
 const questionElement = document.getElementById("question");
-const optionElements = document.getElementsByName("option");
+const optionElements = document.querySelectorAll('input[name="option"]');
+const optionLabels = document.querySelectorAll('#options-container label span');
 const nextButton = document.getElementById("next-button");
 // const resultContainer = document.getElementById("result-container");
 const startButton = document.getElementById("start-button");
+const quizContainer = document.getElementById("quiz-container");
+
+startButton.addEventListener("click", function() {
+    startButton.style.disaply = "none";
+    quizContainer.style.display = "block";
+});
 
 let currentQuestionIndex = 0;
 let score = 0;
@@ -92,10 +99,8 @@ let score = 0;
 function displayQuestion() {
   const currentQuestion = quizQuestions[currentQuestionIndex];
   questionElement.textContent = currentQuestion.question;
-  optionElements.forEach((optionElement, index) => {
-    optionElement.value = currentQuestion.options[index];
-    optionElement.textContent = currentQuestion.options[index];
-    optionElement.checked = false;
+  optionLabels.forEach((optionLabel, index) => {
+    optionLabel.textContent = currentQuestion.options[index];
   });
 }
 
@@ -113,7 +118,11 @@ function nextQuestion() {
       displayResult();
     }
   }
+  optionElements.forEach((optionElement) => {
+    optionElement.checked = false;
+  });
 }
+
 
 // Displaying user's final score.
 // function displayResult() {
