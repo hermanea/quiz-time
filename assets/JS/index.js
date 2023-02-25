@@ -86,17 +86,19 @@ const nextButton = document.getElementById("next-button");
 const startButton = document.getElementById("start-button");
 const timerElement = document.getElementById("timer");
 const resultContainer = document.getElementById("result-container");
-const TIME_LIMIT = 150;
+const highscoreContainer = document.getElementById("highscore-form-container");
+
+const TIME_LIMIT = 100;
 let timeLeft = TIME_LIMIT;
 let currentQuestionIndex = 0;
 let score = 0;
-
 let intervalId;
 
+// Adding event listener that begins the quiz, removes the start quiz button, adds the quiz container, and begins the countdown.
 startButton.addEventListener("click", function() {
     startButton.style.display = "none";
     quizContainer.style.display = "block";
-    timerElement.classList.add("timer-started");
+    timerElement.classList.add('timer-new');
     startQuiz();
 });
 
@@ -115,6 +117,7 @@ function startQuiz() {
     }, 1000);
 }
 
+// Displays the questions with options contained in the quizQuestions array.
 function displayQuestion() {
   const currentQuestion = quizQuestions[currentQuestionIndex];
   questionElement.textContent = currentQuestion.question;
@@ -123,19 +126,19 @@ function displayQuestion() {
   });
 }
 
+// Displays the next questions with options. If a user gets the correct answer, 1 is added to their score, if it is incorrect, 5 seconds are deducted from the timer.
 function nextQuestion() {
     const selectedOption = document.querySelector('input[name="option"]:checked');
         if (selectedOption && parseInt(selectedOption.value) === quizQuestions[currentQuestionIndex].answerIndex) {
             score++;
         } else {
             timeLeft -= 5;
-            timerElement.classList.add("timer-wrong");
         }
+        sessionStorage.setItem('score', score);
         currentQuestionIndex++;
         if (currentQuestionIndex < quizQuestions.length) {
             displayQuestion();
             selectedOption.checked = false;
-            // timerElement.classList.remove("timer-wrong");
         } else {
             clearInterval(intervalId);
             quizContainer.style.display = "none";
@@ -144,22 +147,39 @@ function nextQuestion() {
         }
 }
 
+// Displays the user's final score in an alert. Removes the quiz container and adds the high score container.
 function showResult() {
     const resultText = `Your score: ${score} out of ${quizQuestions.length}`;
     alert(resultText);
-    timerElement.classList.remove("timer-wrong");
+    startButton.style.display = "none";
+    quizContainer.style.display = "none";
+    highscoreContainer.style.display = "block";
 }
 
-let highScore = localStorage.getItem('highScore') || 0;
-if (score > highScore) {
-    highScore = score;
-    localStorage.setItem('highScore', highScore);
-}
-const highScoreElement = document.getElementById('highscore');
-highScoreElement.textContent = `High Score: ${highScore}`;
+// Allows the user to input and save intials which are then displayed in the header after clicking the save score button.
+const saveScoreForm = document.getElementById('save-score-form');
+const initialsInput = document.getElementById('initials');
+const highScoreElement = document.getElementById('highscore-value');
+const saveButton = document.getElementById("save-button");
 
+saveButton.addEventListener('click', function(event) {
+    event.preventDefault();
+    
+    let highestScore = parseInt(localStorage.getItem('highestScore')) || 0;
+    let currentScore = parseInt(sessionStorage.getItem('score')) || 0;
+    let initials = initialsInput.value.trim();
 
+    if (initials && currentScore > highestScore) {
+        highestScore = currentScore;
+        console.log('Setting highestScore in localStorage to', highestScore);
+        localStorage.setItem('highestScore', highestScore);
+        highScoreElement.textContent = `${initials} - ${highestScore}`;
+    }
 
+    initialsInput.value = '';
+});
+
+// Calls the nextQuestion function when clicking the next questions button.
 nextButton.addEventListener("click", function() {
     nextQuestion();
 });

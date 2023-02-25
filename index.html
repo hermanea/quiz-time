@@ -10,8 +10,8 @@
 <body>
     <header>
         <h1>3-Ingredient Cocktail Quiz</h1>
-        <div id="highscore">Your Highscore</div>
-        <div id="timer">150 Seconds Remaining</div>
+        <div id="highscore">High Score: <span id="highscore-value"></span></div>
+        <div id="timer">100 Seconds Remaining</div>
     </header>
     <main>
         <button id="start-button">Begin Quiz</button>
@@ -34,11 +34,11 @@
         <div id="result-container" style="display:none;">
         </div>
 
-        <div id="highscore-form" style="display:none;">
+        <div id="highscore-form-container" style="display:none;">
             <form id="save-score-form">
-                <label for="intitials">Enter your Initials:</label>
-                <input type="text" id="intitials" name="initials">
-                <button type="submit">Save Score</button>
+                <label for="intitials" id="initials-label">Enter your Initials:</label>
+                <input type="text" id="initials" name="initials" class="initials-input">
+                <button id="save-button">Save Score</button>
             </form>
         </div>
 
